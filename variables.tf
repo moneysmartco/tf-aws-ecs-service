@@ -6,6 +6,9 @@ variable "project_name" {
   default = "test"
 }
 ## ECS
+variable "service_container_name" {
+  default = "container-name"
+}
 variable "service_app_port" {
   default = 3000
 }

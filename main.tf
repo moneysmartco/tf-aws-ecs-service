@@ -22,7 +22,7 @@ resource "aws_ecs_service" "service" {
   desired_count   = "${var.ecs_service_desired_count}"
   load_balancer {
     target_group_arn  = "${var.target_group_arn}"
-    container_name    = "${var.project_name}-${var.env}"
+    container_name    = "${var.service_container_name"
     container_port    = "${var.service_app_port}"
   }
 }
