@@ -23,6 +23,6 @@ resource "aws_ecs_service" "service" {
   load_balancer {
     target_group_arn  = "${var.target_group_arn}"
     container_name    = "${var.project_name}-${var.env}"
-    container_port    = "${var.app_env_port}"
+    container_port    = "${var.service_app_port}"
   }
 }

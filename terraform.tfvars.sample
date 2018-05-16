@@ -7,11 +7,12 @@ project_name  = "api"
 #------------------------------
 # Service
 #------------------------------
-service_app_env_port = 3000
+service_app_port            = 3000
 service_server_cpu          = 128
 service_server_memory       = 128
 task_required_cpu           = 128
 task_required_memory        = 128
 service_server_docker_image = "xxx.dkr.ecr.ap-southeast-1.amazonaws.com/service-server:latest"
+ecs_cluster                 = "ecs-cluster-name"
 ecs_service_desired_count   = 1
 target_group_arn            = "arn:xxx"
