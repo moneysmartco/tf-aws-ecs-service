@@ -5,6 +5,7 @@ data "template_file" "service_server_container_definition" {
     service_server_cpu          = "${var.service_server_cpu}"
     service_server_memory       = "${var.service_server_memory}"
     service_server_docker_image = "${var.service_server_docker_image}"
+    service_container_name      = "${var.service_container_name}"
   }
 }
 

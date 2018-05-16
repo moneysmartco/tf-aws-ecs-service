@@ -37,7 +37,7 @@
         "readonlyRootFilesystem": null,
         "dockerLabels": null,
         "privileged": null,
-        "name": "service_server"
+        "name": "${service_container_name}"
     }
 ]
 
