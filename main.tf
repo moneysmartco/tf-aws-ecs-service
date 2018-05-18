@@ -26,4 +26,7 @@ resource "aws_ecs_service" "service" {
     container_name    = "${var.service_container_name}"
     container_port    = "${var.service_app_port}"
   }
+  lifecycle {
+    ignore_changes = ["task_definition"]
+  }
 }
