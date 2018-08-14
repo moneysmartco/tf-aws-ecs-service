@@ -36,7 +36,7 @@ variable "ecs_service_desired_count" {
 variable "target_group_arn" {
   default = ""
 }
-variable "depends_on_target_group_association" {
+variable "depends_on_target_group_attachment" {
   description = "A place holder to wait for the target group from other module to be available"
   default = ""
 }
