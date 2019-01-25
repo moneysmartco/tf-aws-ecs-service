@@ -27,12 +27,17 @@ variable "task_required_memory" {
 variable "service_server_docker_image" {
   default = "xxx.dkr.ecr.ap-southeast-1.amazonaws.com/service-server:latest"
 }
+variable "health_check_grace_period_seconds" {
+  default = 0
+}
+
 variable "ecs_cluster" {
   default = "ecs-cluster-name"
 }
 variable "ecs_service_desired_count" {
   default = 1
 }
+
 variable "target_group_arn" {
   default = ""
 }
