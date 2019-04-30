@@ -1,3 +1,25 @@
+locals {
+  # env tag in map structure
+  env_tag = { Environment = "${var.env}" }
+
+  # ecs task name tag in map structure
+  ecs_task_name_tag = { Name = "${var.project_name}-${var.env}" }
+
+  # ecs service name tag in map structure
+  ecs_service_name_tag = { Name = "${var.project_name}-${var.env}" }
+
+  #------------------------------------------------------------
+  # variables that will be mapped to the various resource block
+  #------------------------------------------------------------
+
+  # ecs task definition tags
+  ecs_task_definition_tags = "${merge(var.tags, local.env_tag, local.ecs_task_name_tag)}"
+
+  # ecs service tags
+  ecs_service_tags = "${merge(var.tags, local.env_tag, local.ecs_service_name_tag)}"
+}
+
+
 data "template_file" "service_server_container_definition" {
   template = "${file("${path.module}/task-definition.json.tpl")}"
   vars {
@@ -9,18 +31,21 @@ data "template_file" "service_server_container_definition" {
   }
 }
 
+
 resource "aws_ecs_task_definition" "service_server" {
   family                = "${var.project_name}-${var.env}"
   cpu                   = "${var.task_required_cpu}"
   memory                = "${var.task_required_memory}"
   container_definitions = "${data.template_file.service_server_container_definition.rendered}"
+  tags                  = "${local.ecs_task_definition_tags}"
 }
 
+
 resource "aws_ecs_service" "service" {
-  name            = "${var.project_name}-${var.env}"
-  cluster         = "${var.ecs_cluster}"
-  task_definition = "${aws_ecs_task_definition.service_server.arn}"
-  desired_count   = "${var.ecs_service_desired_count}"
+  name                              = "${var.project_name}-${var.env}"
+  cluster                           = "${var.ecs_cluster}"
+  task_definition                   = "${aws_ecs_task_definition.service_server.arn}"
+  desired_count                     = "${var.ecs_service_desired_count}"
   health_check_grace_period_seconds = "${var.health_check_grace_period_seconds}"
 
   load_balancer {
@@ -31,4 +56,6 @@ resource "aws_ecs_service" "service" {
   lifecycle {
     ignore_changes = ["task_definition"]
   }
+
+  tags = "${local.ecs_service_tags}"
 }
