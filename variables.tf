@@ -46,3 +46,18 @@ variable "depends_on_target_group_attachment" {
   default = ""
 }
 
+variable "tags" {
+  description = "Tagging resources with default values"
+  default = {
+    "Name" = ""
+    "Country" = ""
+    "Environment" = ""
+    "Repository" = ""
+    "Owner" = ""
+    "Department" = ""
+    "Team" = "shared"
+    "Product" = "common"
+    "Project" = "common"
+    "Stack" = ""
+  }
+}
