@@ -2,21 +2,25 @@ locals {
   # env tag in map structure
   env_tag = { Environment = "${var.env}" }
 
+  # project tag in map structure
+  project_tag = { Project = "${var.project_name}" }
+
   # ecs task name tag in map structure
   ecs_task_name_tag = { Name = "${var.project_name}-${var.env}" }
 
   # ecs service name tag in map structure
   ecs_service_name_tag = { Name = "${var.project_name}-${var.env}" }
 
+
   #------------------------------------------------------------
   # variables that will be mapped to the various resource block
   #------------------------------------------------------------
 
   # ecs task definition tags
-  ecs_task_definition_tags = "${merge(var.tags, local.env_tag, local.ecs_task_name_tag)}"
+  ecs_task_definition_tags = "${merge(var.tags, local.env_tag, local.project_tag, local.ecs_task_name_tag)}"
 
   # ecs service tags
-  ecs_service_tags = "${merge(var.tags, local.env_tag, local.ecs_service_name_tag)}"
+  ecs_service_tags = "${merge(var.tags, local.env_tag, local.project_tag, local.ecs_service_name_tag)}"
 }
 
 
