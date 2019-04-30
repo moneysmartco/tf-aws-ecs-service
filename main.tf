@@ -61,5 +61,6 @@ resource "aws_ecs_service" "service" {
     ignore_changes = ["task_definition"]
   }
 
-  tags = "${local.ecs_service_tags}"
+  # no tagging feature supported for existing service with short arn, will not work even with opt-in
+  # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
 }
