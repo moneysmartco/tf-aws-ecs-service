@@ -3,6 +3,9 @@
 
 Define ECS service inside an existing ECS cluster
 
+Tagging of ECS service is only possible if creating a brand new cluster, please use release v1.2.1.
+Otherwise, use release v1.2 for tagging on task definition only.
+
 ## Run with terraform
 
 Update necessary variables and settings in terraform.tfvars following the sample file.
