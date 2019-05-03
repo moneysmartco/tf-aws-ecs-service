@@ -1,10 +1,15 @@
 # ECS Service
 [![CircleCI](https://circleci.com/gh/moneysmartco/tf-aws-ecs-service.svg?style=svg&circle-token=xxx)](https://circleci.com/gh/moneysmartco/tf-aws-ecs-service)
 
-Define ECS service inside an existing ECS cluster
+Define ECS service and the dependent Task Definition inside an existing ECS cluster
 
-Tagging of ECS service is only possible if creating a brand new cluster, please use release v1.2.1.
-Otherwise, use release v1.2 for tagging on task definition only.
+
+
+## Important note
+1) The state of Task Definition will drift once deployment from drone occurs.
+2) Tagging of Task Definition will be applied only on the Task Definition arn that is tracked on terraform, which will not be the latest Task Definition once deployment from drone occurs.
+3) Tagging of ECS service is only possible if executed on a brand new cluster, because of long arn format requirement. Please use [release v1.2](https://github.com/moneysmartco/tf-aws-ecs-service/tree/v1.2).
+Otherwise, use [release v1.2.1](https://github.com/moneysmartco/tf-aws-ecs-service/tree/v1.2.1) for tagging of Task Definition only.
 
 ## Run with terraform
 
