@@ -8,6 +8,7 @@
             }
         },
         "entryPoint": null,
+        "command": %{ if service_container_cmd == "" }null%{ else }${jsonencode(split(" ", service_container_cmd))}%{ endif },
         "portMappings": [
             {
                 "hostPort": 0,

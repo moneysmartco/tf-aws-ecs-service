@@ -9,6 +9,10 @@ variable "project_name" {
 variable "service_container_name" {
   default = "container-name"
 }
+variable "service_container_cmd" {
+  description = "Command to start container (follow Dockerfile's CMD by default)"
+  default = ""
+}
 variable "service_app_port" {
   default = 3000
 }
