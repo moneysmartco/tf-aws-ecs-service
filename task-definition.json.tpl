@@ -9,6 +9,7 @@
         },
         "entryPoint": null,
         "command": %{ if service_container_cmd == "" }null%{ else }${jsonencode(split(" ", service_container_cmd))}%{ endif },
+%{ if port > 0 }
         "portMappings": [
             {
                 "hostPort": 0,
@@ -16,7 +17,7 @@
                 "containerPort": ${port}
             }
         ],
-        "command": null,
+%{ endif }
         "linuxParameters": null,
         "cpu": ${service_server_cpu},
         "environment": [],
