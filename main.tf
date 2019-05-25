@@ -45,7 +45,9 @@ resource "aws_ecs_task_definition" "service_server" {
   tags                  = "${local.ecs_task_definition_tags}"
 }
 
-
+#------------------------------------------------------
+# Web service which required to listen a specific port
+#------------------------------------------------------
 resource "aws_ecs_service" "service" {
   count = "${var.service_app_port > 0 ? 1 : 0}"
 
@@ -68,6 +70,9 @@ resource "aws_ecs_service" "service" {
   # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
 }
 
+#-----------------------------
+# Background / Worker service
+#-----------------------------
 resource "aws_ecs_service" "service_background" {
   count = "${var.service_app_port > 0 ? 0 : 1}"
 
