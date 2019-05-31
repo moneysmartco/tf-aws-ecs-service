@@ -55,6 +55,9 @@ resource "aws_ecs_service" "service" {
   cluster                           = "${var.ecs_cluster}"
   task_definition                   = "${aws_ecs_task_definition.service_server.arn}"
   desired_count                     = "${var.ecs_service_desired_count}"
+  lifecycle {
+    ignore_changes = ["desired_count"]
+  }
   health_check_grace_period_seconds = "${var.health_check_grace_period_seconds}"
 
   load_balancer {
