@@ -72,7 +72,7 @@ variable "ecs_service_autoscale_enabled" {
 }
 
 variable "ecs_autoscale_role_arn" {
-  decription = "ECS IAM role to be used for autoscaling"
+  description = "ECS IAM role to be used for autoscaling"
   default = ""
 }
 
