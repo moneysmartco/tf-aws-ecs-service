@@ -88,3 +88,13 @@ resource "aws_ecs_service" "service_background" {
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
   # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
 }
+
+resource "aws_appautoscaling_target" "appautoscaling_target" {
+  count              = "${var.ecs_service_autoscale_enabled? 1 : 0}"
+  max_capacity       = "${var.autoscale_max_capacity}"
+  min_capacity       = "${var.autoscale_min_capacity}"
+  resource_id        = "service/${var.cluster}/${var.project_name}"
+  role_arn           = "${var.ecs_autoscale_role_arn}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+}

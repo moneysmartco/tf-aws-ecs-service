@@ -65,3 +65,21 @@ variable "tags" {
     "Stack" = ""
   }
 }
+
+## Service autoscaling
+variable "ecs_service_autoscale_enabled" {
+  default = false
+}
+
+variable "ecs_autoscale_role_arn" {
+  decription = "ECS IAM role to be used for autoscaling"
+  default = ""
+}
+
+variable "autoscale_max_capacity" {
+  default = 10
+}
+
+variable "autoscale_min_capacity" {
+  default = 1
+}
