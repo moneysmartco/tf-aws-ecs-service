@@ -100,7 +100,7 @@ resource "aws_appautoscaling_target" "appautoscaling_target" {
   service_namespace  = "ecs"
 }
 
-resource "aws_appautoscaling_policy" "ecs_service_autoscaling_policy" {
+resource "aws_appautoscaling_policy" "ecs_service_cpu_autoscaling_policy" {
   name               = "scale-up-from-cpu-utilization"
   policy_type        = "TargetTrackingScaling"
   resource_id        = "${aws_appautoscaling_target.appautoscaling_target.resource_id}"
@@ -118,7 +118,7 @@ resource "aws_appautoscaling_policy" "ecs_service_autoscaling_policy" {
   }
 }
 
-resource "aws_appautoscaling_policy" "ecs_service_autoscaling_policy" {
+resource "aws_appautoscaling_policy" "ecs_service_memory_autoscaling_policy" {
   name               = "scale-up-from-memory-utilization"
   policy_type        = "TargetTrackingScaling"
   resource_id        = "${aws_appautoscaling_target.appautoscaling_target.resource_id}"
