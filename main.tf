@@ -55,9 +55,6 @@ resource "aws_ecs_service" "service" {
   cluster                           = "${var.ecs_cluster}"
   task_definition                   = "${aws_ecs_task_definition.service_server.arn}"
   desired_count                     = "${var.ecs_service_desired_count}"
-  lifecycle {
-    ignore_changes = ["desired_count"]
-  }
   health_check_grace_period_seconds = "${var.health_check_grace_period_seconds}"
 
   load_balancer {
@@ -66,7 +63,7 @@ resource "aws_ecs_service" "service" {
     container_port    = "${var.service_app_port}"
   }
   lifecycle {
-    ignore_changes = ["task_definition"]
+    ignore_changes = ["task_definition", "desired_count"]
   }
 
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
