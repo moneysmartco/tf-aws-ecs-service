@@ -105,9 +105,9 @@ resource "aws_appautoscaling_target" "appautoscaling_target" {
 resource "aws_appautoscaling_policy" "ecs_service_cpu_autoscaling_policy" {
   name               = "scale-up-from-cpu-utilization"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = "${aws_appautoscaling_target.appautoscaling_target.resource_id}"
-  scalable_dimension = "${aws_appautoscaling_target.appautoscaling_target.scalable_dimension}"
-  service_namespace  = "${aws_appautoscaling_target.appautoscaling_target.service_namespace}"
+  resource_id        = "service/${var.ecs_cluster}/${var.project_name}-${var.env}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
 
   target_tracking_scaling_policy_configuration {
     predefined_metric_specification {
@@ -123,9 +123,9 @@ resource "aws_appautoscaling_policy" "ecs_service_cpu_autoscaling_policy" {
 resource "aws_appautoscaling_policy" "ecs_service_memory_autoscaling_policy" {
   name               = "scale-up-from-memory-utilization"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = "${aws_appautoscaling_target.appautoscaling_target.resource_id}"
-  scalable_dimension = "${aws_appautoscaling_target.appautoscaling_target.scalable_dimension}"
-  service_namespace  = "${aws_appautoscaling_target.appautoscaling_target.service_namespace}"
+  resource_id        = "service/${var.ecs_cluster}/${var.project_name}-${var.env}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
 
   target_tracking_scaling_policy_configuration {
     predefined_metric_specification {
