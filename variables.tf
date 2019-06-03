@@ -84,6 +84,9 @@ variable "autoscale_min_capacity" {
   default = 2
 }
 
+variable "ecs_service_cpu_autoscale_policy_enabled" {
+  default = false
+}
 variable "ecs_cpu_autoscale_target_value" {
   default = 60
 }
@@ -105,4 +108,9 @@ variable "ecs_memory_autoscale_scale_in_cooldown" {
 
 variable "ecs_memory_autoscale_scale_out_cooldown" {
   default = 60
+}
+
+
+variable "ecs_service_memory_autoscale_policy_enabled" {
+  default = false
 }
