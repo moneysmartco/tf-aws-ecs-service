@@ -65,3 +65,44 @@ variable "tags" {
     "Stack" = ""
   }
 }
+
+## Service autoscaling
+variable "ecs_service_autoscale_enabled" {
+  default = false
+}
+
+variable "ecs_autoscale_role_arn" {
+  description = "ECS IAM role to be used for autoscaling"
+  default = ""
+}
+
+variable "autoscale_max_capacity" {
+  default = 10
+}
+
+variable "autoscale_min_capacity" {
+  default = 1
+}
+
+variable "ecs_cpu_autoscale_target_value" {
+  default = 60
+}
+
+variable "ecs_cpu_autoscale_scale_in_cooldown" {
+  default = 300
+}
+
+variable "ecs_cpu_autoscale_scale_out_cooldown" {
+  default = 60
+}
+variable "ecs_memory_autoscale_target_value" {
+  default = 60
+}
+
+variable "ecs_memory_autoscale_scale_in_cooldown" {
+  default = 300
+}
+
+variable "ecs_memory_autoscale_scale_out_cooldown" {
+  default = 60
+}

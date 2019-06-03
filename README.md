@@ -10,6 +10,7 @@ Define ECS service and the dependent Task Definition inside an existing ECS clus
 2) Tagging of Task Definition will be applied only on the Task Definition arn that is tracked on terraform, which will not be the latest Task Definition once deployment from drone occurs.
 3) Tagging of ECS service is only possible if executed on a brand new cluster, because of long arn format requirement. Please use [release v1.2](https://github.com/moneysmartco/tf-aws-ecs-service/tree/v1.2).
 Otherwise, use [release v1.2.1](https://github.com/moneysmartco/tf-aws-ecs-service/tree/v1.2.1) for tagging of Task Definition only.
+4) Autoscaling here refers to the number of containers that the ECS service can spawn. The current metrics being used are Average Container CPU usage and Average Container Memory Usage
 
 ## Run with terraform
 
