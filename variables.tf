@@ -83,3 +83,26 @@ variable "autoscale_max_capacity" {
 variable "autoscale_min_capacity" {
   default = 1
 }
+
+variable "ecs_cpu_autoscale_target_value" {
+  default = 60
+}
+
+variable "ecs_cpu_autoscale_scale_in_cooldown" {
+  default = 300
+}
+
+variable "ecs_cpu_autoscale_scale_out_cooldown" {
+  default = 60
+}
+variable "ecs_memory_autoscale_target_value" {
+  default = 60
+}
+
+variable "ecs_memory_autoscale_scale_in_cooldown" {
+  default = 300
+}
+
+variable "ecs_memory_autoscale_scale_out_cooldown" {
+  default = 60
+}

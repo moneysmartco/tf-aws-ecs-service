@@ -89,7 +89,9 @@ resource "aws_ecs_service" "service_background" {
   # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
 }
 
-## Autoscaling
+#-----------------------------
+# Autoscaling (Service level)
+#-----------------------------
 resource "aws_appautoscaling_target" "appautoscaling_target" {
   count              = "${var.ecs_service_autoscale_enabled? 1 : 0}"
   max_capacity       = "${var.autoscale_max_capacity}"
@@ -112,9 +114,9 @@ resource "aws_appautoscaling_policy" "ecs_service_cpu_autoscaling_policy" {
       predefined_metric_type = "ECSServiceAverageCPUUtilization"
     }
 
-    target_value            = 60
-    scale_in_cooldown       = 300
-    scale_out_cooldown      = 60
+    target_value            = "${var.ecs_cpu_autoscale_target_value}"
+    scale_in_cooldown       = "${var.ecs_cpu_autoscale_scale_in_cooldown}"
+    scale_out_cooldown      = "${var.ecs_cpu_autoscale_scale_out_cooldown}"
   }
 }
 
@@ -130,8 +132,8 @@ resource "aws_appautoscaling_policy" "ecs_service_memory_autoscaling_policy" {
       predefined_metric_type = "ECSServiceAverageMemoryUtilization"
     }
 
-    target_value            = 60
-    scale_in_cooldown       = 300
-    scale_out_cooldown      = 60
+    target_value            = "${var.ecs_memory_autoscale_target_value}"
+    scale_in_cooldown       = "${var.ecs_memory_autoscale_scale_in_cooldown}"
+    scale_out_cooldown      = "${var.ecs_memory_autoscale_scale_out_cooldown}"
   }
 }
