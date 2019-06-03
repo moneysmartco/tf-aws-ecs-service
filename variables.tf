@@ -81,7 +81,7 @@ variable "autoscale_max_capacity" {
 }
 
 variable "autoscale_min_capacity" {
-  default = 1
+  default = 2
 }
 
 variable "ecs_cpu_autoscale_target_value" {
