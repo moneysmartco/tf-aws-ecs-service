@@ -123,6 +123,9 @@ variable "ecs_request_count_autoscale_target_value" {
   default = 100
 }
 
+variable "target_group_resource_label" {
+  default = ""
+}
 variable "ecs_request_count_autoscale_scale_in_cooldown" {
   default = 300
 }
