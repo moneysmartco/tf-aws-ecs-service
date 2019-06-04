@@ -139,3 +139,23 @@ resource "aws_appautoscaling_policy" "ecs_service_memory_autoscaling_policy" {
     scale_out_cooldown      = "${var.ecs_memory_autoscale_scale_out_cooldown}"
   }
 }
+
+resource "aws_appautoscaling_policy" "ecs_service_request_count_autoscaling_policy" {
+  count              = "${var.ecs_service_request_count_autoscale_policy_enabled? 1 : 0}"
+  name               = "scale-up-from-request-count-per-target"
+  policy_type        = "TargetTrackingScaling"
+  resource_id        = "service/${var.ecs_cluster}/${var.project_name}-${var.env}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = "ecs"
+
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ALBRequestCountPerTarget"
+      resource_label = "${var.target_group_resource_label}"
+    }
+
+    target_value            = "${var.ecs_request_count_autoscale_target_value}"
+    scale_in_cooldown       = "${var.ecs_request_count_autoscale_scale_in_cooldown}"
+    scale_out_cooldown      = "${var.ecs_request_count_autoscale_scale_out_cooldown}"
+  }
+}
