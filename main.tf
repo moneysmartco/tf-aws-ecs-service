@@ -142,7 +142,7 @@ resource "aws_appautoscaling_policy" "ecs_service_memory_autoscaling_policy" {
 
 resource "aws_appautoscaling_policy" "ecs_service_request_count_autoscaling_policy" {
   count              = "${var.ecs_service_request_count_autoscale_policy_enabled? 1 : 0}"
-  name               = "scale-up-from-target-group-request-count"
+  name               = "scale-up-from-request-count-per-target"
   policy_type        = "TargetTrackingScaling"
   resource_id        = "service/${var.ecs_cluster}/${var.project_name}-${var.env}"
   scalable_dimension = "ecs:service:DesiredCount"
