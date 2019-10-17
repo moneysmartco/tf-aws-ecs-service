@@ -35,6 +35,10 @@ variable "health_check_grace_period_seconds" {
   default = 0
 }
 
+variable "task_role_arn" {
+  default = ""
+}
+
 variable "ecs_cluster" {
   default = "ecs-cluster-name"
 }
