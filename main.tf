@@ -42,6 +42,7 @@ resource "aws_ecs_task_definition" "service_server" {
   cpu                   = "${var.task_required_cpu}"
   memory                = "${var.task_required_memory}"
   container_definitions = "${data.template_file.service_server_container_definition.rendered}"
+  task_role_arn         = "${var.task_role_arn}"
   tags                  = "${local.ecs_task_definition_tags}"
 }
 
