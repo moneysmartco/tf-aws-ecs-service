@@ -75,7 +75,7 @@ resource "aws_ecs_service" "service" {
 
   ordered_placement_strategy {
     type  = "spread"
-    field = "attribute:ecs.availability-zone"
+    field = "instanceId"
   }
   load_balancer {
     target_group_arn = var.target_group_arn
