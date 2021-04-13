@@ -77,6 +77,10 @@ resource "aws_ecs_service" "service" {
     type  = "spread"
     field = "instanceId"
   }
+  placement_constraints {
+    type       = "distinctInstance"
+  }
+  
   load_balancer {
     target_group_arn = var.target_group_arn
     container_name   = var.service_container_name
@@ -108,7 +112,10 @@ resource "aws_ecs_service" "service_background" {
   }
   ordered_placement_strategy {
     type  = "spread"
-    field = "attribute:ecs.availability-zone"
+    field = "instanceId"
+  }
+  placement_constraints {
+    type       = "distinctInstance"
   }
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
   # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
