@@ -8,6 +8,10 @@ variable "project_name" {
 }
 
 ## ECS
+variable "enable_distinct_instance" {
+  default = false
+}
+
 variable "service_container_name" {
   default = "container-name"
 }
