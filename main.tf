@@ -127,7 +127,7 @@ resource "aws_ecs_service" "service_distinct_instance" {
 # Background / Worker service
 #-----------------------------
 resource "aws_ecs_service" "service_background" {
-  count = var.service_app_port > 0 && var.enable_distinct_instance = false ? 0 : 1
+  count = var.service_app_port > 0 && var.enable_distinct_instance == false ? 0 : 1
 
   name            = "${var.project_name}-${var.env}"
   cluster         = var.ecs_cluster
@@ -146,7 +146,7 @@ resource "aws_ecs_service" "service_background" {
 }
 
 resource "aws_ecs_service" "service_background_distinct_instance" {
-  count = var.service_app_port > 0 && var.enable_distinct_instance = true ? 0 : 1
+  count = var.service_app_port > 0 && var.enable_distinct_instance == true ? 0 : 1
   name            = "${var.project_name}-${var.env}"
   cluster         = var.ecs_cluster
   task_definition = aws_ecs_task_definition.service_server.arn
