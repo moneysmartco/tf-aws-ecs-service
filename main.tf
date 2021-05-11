@@ -93,7 +93,7 @@ resource "aws_ecs_service" "service" {
 }
 
 resource "aws_ecs_service" "service_distinct_instance" {
-  count = var.service_app_port > 0 && var.enable_distinct_instance == true ? 1 : 0
+  count = (var.service_app_port > 0 && var.enable_distinct_instance == true) ? 1 : 0
   name                              = "${var.project_name}-${var.env}"
   cluster                           = var.ecs_cluster
   task_definition                   = aws_ecs_task_definition.service_server.arn
@@ -127,26 +127,8 @@ resource "aws_ecs_service" "service_distinct_instance" {
 # Background / Worker service
 #-----------------------------
 resource "aws_ecs_service" "service_background" {
-  count = (var.service_app_port > 0 && var.enable_distinct_instance == false) ? 0 : 1
+  count = var.service_app_port > 0 ? 0 : 1
 
-  name            = "${var.project_name}-${var.env}"
-  cluster         = var.ecs_cluster
-  task_definition = aws_ecs_task_definition.service_server.arn
-  desired_count   = var.ecs_service_desired_count
-
-  lifecycle {
-    ignore_changes = [task_definition]
-  }
-  ordered_placement_strategy {
-    type  = "spread"
-    field = "instanceId"
-  }
-  # no tagging feature supported for existing service with short arn, will not work even with opt-in
-  # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
-}
-
-resource "aws_ecs_service" "service_background_distinct_instance" {
-  count = var.service_app_port > 0 && var.enable_distinct_instance == true ? 0 : 1
   name            = "${var.project_name}-${var.env}"
   cluster         = var.ecs_cluster
   task_definition = aws_ecs_task_definition.service_server.arn
@@ -165,6 +147,7 @@ resource "aws_ecs_service" "service_background_distinct_instance" {
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
   # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
 }
+
 
 #-----------------------------
 # Autoscaling (Service level)
