@@ -8,7 +8,7 @@ variable "project_name" {
 }
 
 ## ECS
-variable "enable_distinct_instance" {
+variable "enable_task_placement_constraints" {
   default = false
 }
 
