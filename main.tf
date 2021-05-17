@@ -65,7 +65,7 @@ resource "aws_ecs_task_definition" "service_server" {
 # Web service which required to listen a specific port
 #------------------------------------------------------
 resource "aws_ecs_service" "service" {
-  count = (var.service_app_port > 0 && var.enable_task_placement_constraints == false) ? 1 : 0
+  count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "false") ? 1 : 0
 
   name                              = "${var.project_name}-${var.env}"
   cluster                           = var.ecs_cluster
@@ -93,7 +93,7 @@ resource "aws_ecs_service" "service" {
 }
 
 resource "aws_ecs_service" "service_distinct_instance" {
-  count = (var.service_app_port > 0 && var.enable_task_placement_constraints == true) ? 1 : 0
+  count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "true") ? 1 : 0
   name                              = "${var.project_name}-${var.env}"
   cluster                           = var.ecs_cluster
   task_definition                   = aws_ecs_task_definition.service_server.arn
