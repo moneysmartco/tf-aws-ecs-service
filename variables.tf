@@ -8,9 +8,10 @@ variable "project_name" {
 }
 
 ## ECS
-variable "enable_task_placement_constraints" {
-  default = false
-}
+
+# variable "enable_task_placement_constraints" {
+#   default = false
+# }
 
 variable "service_container_name" {
   default = "container-name"
