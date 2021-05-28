@@ -64,7 +64,7 @@ resource "aws_ecs_task_definition" "service_server" {
 #------------------------------------------------------
 # Web service which required to listen a specific port
 #------------------------------------------------------
-resource "aws_ecs_service" "service" {
+resource "aws_ecs_service" "service_disable_placement_constraints" {
   count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "false") ? 1 : 0
 
   name                              = "${var.project_name}-${var.env}"
@@ -92,7 +92,7 @@ resource "aws_ecs_service" "service" {
   # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
 }
 
-resource "aws_ecs_service" "service_distinct_instance" {
+resource "aws_ecs_service" "service" {
   count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "true") ? 1 : 0
   name                              = "${var.project_name}-${var.env}"
   cluster                           = var.ecs_cluster
