@@ -133,7 +133,8 @@ resource "aws_ecs_service" "service_background" {
   name            = "${var.project_name}-${var.env}"
   cluster         = var.ecs_cluster
   task_definition = aws_ecs_task_definition.service_server.arn
-  desired_count   = var.ecs_service_desired_count
+  #desired_count   = var.ecs_service_desired_count
+  desired_count   = 3
 
   lifecycle {
     ignore_changes = [task_definition]
