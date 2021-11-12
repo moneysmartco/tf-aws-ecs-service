@@ -58,7 +58,6 @@ variable "ecs_cluster" {
 }
 
 variable "ecs_service_desired_count" {
-  default = 3
 }
 
 variable "target_group_arn" {
