@@ -1,12 +1,6 @@
 [
     {
         "dnsSearchDomains": null,
-        "logConfiguration": {
-            "logDriver": "syslog",
-            "options": {
-                "syslog-address": "tcp://127.0.0.1:601"
-            }
-        },
         "entryPoint": null,
         "command": %{ if service_container_cmd == "" }null%{ else }${jsonencode(split(" ", service_container_cmd))}%{ endif },
 %{ if port > 0 }
