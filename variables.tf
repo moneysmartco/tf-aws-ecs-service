@@ -162,4 +162,3 @@ variable "ecs_request_count_autoscale_scale_in_cooldown" {
 variable "ecs_request_count_autoscale_scale_out_cooldown" {
   default = 60
 }
-
