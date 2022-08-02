@@ -65,7 +65,7 @@ resource "aws_ecs_task_definition" "service_server" {
 # Web service which required to listen a specific port
 #------------------------------------------------------
 resource "aws_ecs_service" "service_disable_placement_constraints" {
-  count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "false") ? 1 : 0
+  count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "false" && var.enable_two_alb == "false") ? 1 : 0
 
   name                              = "${var.project_name}-${var.env}"
   cluster                           = var.ecs_cluster
@@ -79,6 +79,39 @@ resource "aws_ecs_service" "service_disable_placement_constraints" {
   }
   load_balancer {
     target_group_arn = var.target_group_arn
+    container_name   = var.service_container_name
+    container_port   = var.service_app_port
+  }
+  lifecycle {
+    ignore_changes = [
+      task_definition,
+      desired_count,
+    ]
+  }
+  # no tagging feature supported for existing service with short arn, will not work even with opt-in
+  # https://github.com/terraform-providers/terraform-provider-aws/issues/6481
+}
+
+resource "aws_ecs_service" "service_disable_placement_constraints_with_two_alb" {
+  count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "false" && var.enable_two_alb == "true") ? 1 : 0
+
+  name                              = "${var.project_name}-${var.env}"
+  cluster                           = var.ecs_cluster
+  task_definition                   = aws_ecs_task_definition.service_server.arn
+  desired_count                     = var.ecs_service_desired_count
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
+
+  ordered_placement_strategy {
+    type  = "spread"
+    field = "instanceId"
+  }
+  load_balancer {
+    target_group_arn = var.target_group_arn
+    container_name   = var.service_container_name
+    container_port   = var.service_app_port
+  }
+  load_balancer {
+    target_group_arn = var.target_group_arn_1
     container_name   = var.service_container_name
     container_port   = var.service_app_port
   }
