@@ -12,7 +12,7 @@ variable "enable_task_placement_constraints" {
   default = false
 }
 
-variable "enable_two_alb" {
+variable "additional_target_group" {
   default = false
 }
 
