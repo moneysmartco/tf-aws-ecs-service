@@ -171,7 +171,7 @@ resource "aws_ecs_service" "service_with_additional_target_group" {
   placement_constraints {
     type       = "distinctInstance"
   }
-  
+
   load_balancer {
     target_group_arn = var.target_group_arn
     container_name   = var.service_container_name
