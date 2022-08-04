@@ -111,7 +111,7 @@ resource "aws_ecs_service" "service_disable_placement_constraints_with_additiona
     container_port   = var.service_app_port
   }
   load_balancer {
-    target_group_arn = var.target_group_arn_1
+    target_group_arn = var.additional_target_group_arn
     container_name   = var.service_container_name
     container_port   = var.service_app_port
   }
@@ -179,7 +179,7 @@ resource "aws_ecs_service" "service_with_additional_target_group" {
   }
 
   load_balancer {
-    target_group_arn = var.target_group_arn_1
+    target_group_arn = var.additional_target_group_arn
     container_name   = var.service_container_name
     container_port   = var.service_app_port
   }

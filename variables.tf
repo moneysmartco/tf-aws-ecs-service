@@ -69,7 +69,7 @@ variable "target_group_arn" {
   default = ""
 }
 
-variable "target_group_arn_1" {
+variable "additional_target_group_arn" {
   default = ""
 }
 
