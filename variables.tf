@@ -12,6 +12,10 @@ variable "enable_task_placement_constraints" {
   default = false
 }
 
+variable "additional_target_group" {
+  default = false
+}
+
 variable "service_container_name" {
   default = "container-name"
 }
@@ -62,6 +66,10 @@ variable "ecs_service_desired_count" {
 }
 
 variable "target_group_arn" {
+  default = ""
+}
+
+variable "additional_target_group_arn" {
   default = ""
 }
 
