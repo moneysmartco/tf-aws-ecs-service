@@ -171,3 +171,12 @@ variable "ecs_request_count_autoscale_scale_out_cooldown" {
   default = 60
 }
 
+variable deployment_maximum_percent {
+  default = 200
+
+}  
+
+variable deployment_minimum_healthy_percent {
+  default = 100
+
+} 

@@ -67,11 +67,13 @@ resource "aws_ecs_task_definition" "service_server" {
 resource "aws_ecs_service" "service_disable_placement_constraints" {
   count = (var.service_app_port > 0 && var.enable_task_placement_constraints == "false" && var.additional_target_group == "false") ? 1 : 0
 
-  name                              = "${var.project_name}-${var.env}"
-  cluster                           = var.ecs_cluster
-  task_definition                   = aws_ecs_task_definition.service_server.arn
-  desired_count                     = var.ecs_service_desired_count
-  health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  name                                = "${var.project_name}-${var.env}"
+  cluster                             = var.ecs_cluster
+  task_definition                     = aws_ecs_task_definition.service_server.arn
+  desired_count                       = var.ecs_service_desired_count
+  health_check_grace_period_seconds   = var.health_check_grace_period_seconds
+  deployment_maximum_percent          = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent  = var.deployment_minimum_healthy_percent
 
   ordered_placement_strategy {
     type  = "spread"
@@ -100,6 +102,8 @@ resource "aws_ecs_service" "service_disable_placement_constraints_with_additiona
   task_definition                   = aws_ecs_task_definition.service_server.arn
   desired_count                     = var.ecs_service_desired_count
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  deployment_maximum_percent          = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent  = var.deployment_minimum_healthy_percent
 
   ordered_placement_strategy {
     type  = "spread"
@@ -132,6 +136,8 @@ resource "aws_ecs_service" "service" {
   task_definition                   = aws_ecs_task_definition.service_server.arn
   desired_count                     = var.ecs_service_desired_count
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  deployment_maximum_percent          = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent  = var.deployment_minimum_healthy_percent
 
   ordered_placement_strategy {
     type  = "spread"
@@ -163,6 +169,8 @@ resource "aws_ecs_service" "service_with_additional_target_group" {
   task_definition                   = aws_ecs_task_definition.service_server.arn
   desired_count                     = var.ecs_service_desired_count
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  deployment_maximum_percent          = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent  = var.deployment_minimum_healthy_percent
 
   ordered_placement_strategy {
     type  = "spread"
