@@ -211,6 +211,8 @@ resource "aws_ecs_service" "service_background" {
   cluster         = var.ecs_cluster
   task_definition = aws_ecs_task_definition.service_server.arn
   desired_count   = var.ecs_service_desired_count
+  deployment_maximum_percent          = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent  = var.deployment_minimum_healthy_percent
 
   lifecycle {
     ignore_changes = [task_definition]
