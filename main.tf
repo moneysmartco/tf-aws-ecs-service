@@ -87,7 +87,7 @@ resource "aws_ecs_service" "service_disable_placement_constraints" {
   lifecycle {
     ignore_changes = [
       task_definition,
-      desired_count,
+      #desired_count,
     ]
   }
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
@@ -122,7 +122,7 @@ resource "aws_ecs_service" "service_disable_placement_constraints_with_additiona
   lifecycle {
     ignore_changes = [
       task_definition,
-      desired_count,
+      #desired_count,
     ]
   }
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
@@ -155,7 +155,7 @@ resource "aws_ecs_service" "service" {
   lifecycle {
     ignore_changes = [
       task_definition,
-      desired_count,
+      #desired_count,
     ]
   }
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
@@ -194,7 +194,7 @@ resource "aws_ecs_service" "service_with_additional_target_group" {
   lifecycle {
     ignore_changes = [
       task_definition,
-      desired_count,
+      #desired_count,
     ]
   }
   # no tagging feature supported for existing service with short arn, will not work even with opt-in
